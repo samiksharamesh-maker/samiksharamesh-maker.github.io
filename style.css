@@ -1,0 +1,210 @@
+/* Colours, fonts and the spacing scale used everywhere */
+:root {
+  --bg: #FAF8F3;
+  --white: #FFFFFF;
+  --text: #1F1F1F;
+  --text-2: #4A4A4A;
+  --line: #D9D5CB;
+  --accent: #1F5C45;
+  --font-head: "DM Serif Display", Georgia, serif;
+  --font-body: "Inter", system-ui, Arial, sans-serif;
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 40px;
+  --s5: 64px;
+}
+
+/* Page base: body, headings, paragraphs and links */
+* { box-sizing: border-box; }
+
+html { scroll-padding-top: 72px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2.25rem, 7vw, 3.5rem); }
+h2 { margin-bottom: var(--s3); font-size: 2rem; }
+h3 { margin-bottom: var(--s1); font-size: 1.375rem; }
+
+p { margin: 0; max-width: 68ch; }
+
+a { color: var(--accent); }
+a:hover { color: var(--text); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* Navigation bar, built with flexbox */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--s3);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s2);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-brand:hover,
+.nav-link:hover { color: var(--accent); text-decoration: underline; }
+
+/* Page sections: one centred column with big gaps between sections */
+main { padding-bottom: var(--s5); }
+
+main > section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--s5) var(--s3) 0;
+}
+
+/* Hero: name, one sentence and the main buttons */
+.hero-role { margin: var(--s1) 0 var(--s3); font-size: 1.375rem; color: var(--text-2); }
+.hero-text { margin-bottom: var(--s3); }
+
+/* Buttons: filled for the main action, outlined for the others */
+.button-row { display: flex; flex-wrap: wrap; gap: var(--s1); }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--s3);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.button:hover { background: var(--accent); color: var(--white); }
+.button-primary { background: var(--accent); color: var(--white); }
+.button-primary:hover { background: var(--white); color: var(--accent); }
+
+/* Cards: flat white boxes with a thin outline, laid out with grid */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--s3);
+}
+
+.card {
+  padding: var(--s3);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.card p + p { margin-top: var(--s1); }
+.meta { color: var(--text-2); }
+
+/* Contact section: text, then the email and LinkedIn buttons */
+#contact p { margin-bottom: var(--s3); }
+
+/* Resume section: the download button above the white paper sheet */
+#paper > p { margin-bottom: var(--s3); }
+
+#resume {
+  max-width: 210mm;
+  padding: var(--s4);
+  background: var(--white);
+  border: 1px solid var(--line);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.resume-name { font-family: var(--font-head); font-size: 1.875rem; line-height: 1.2; }
+.resume-contact { margin-top: var(--s1); margin-bottom: var(--s2); }
+
+#resume h3 {
+  margin: var(--s3) 0 var(--s1);
+  padding-bottom: var(--s1);
+  border-bottom: 1px solid var(--line);
+  font-size: 1.125rem;
+}
+
+#resume h4 { margin-top: var(--s2); font-family: var(--font-body); font-size: 1rem; font-weight: 600; }
+#resume ul { margin: var(--s1) 0 0; padding-left: 20px; }
+#resume li { margin-bottom: 4px; }
+
+/* Screens narrower than 700px: one column, smaller gaps, 16px from the edge */
+@media (max-width: 699px) {
+  html { scroll-padding-top: 0; }
+  .nav-bar { position: static; }
+  .nav { padding: 0 var(--s2); }
+  main > section { padding: var(--s4) var(--s2) 0; }
+  h2 { font-size: 1.75rem; }
+  .cards { grid-template-columns: 1fr; }
+  .button-row .button,
+  #paper .button { width: 100%; }
+  #resume { padding: var(--s3) var(--s2); }
+}
+
+/* Turn off the button colour fade for people who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: none; }
+}
+
+/* Print: show only the resume, black on white, on one A4 page */
+@page { size: A4; margin: 15mm; }
+
+@media print {
+  .nav-bar, #hero, #experience, #analysis, #education, #contact,
+  #paper > h2, #paper > p { display: none; }
+  body { background: #fff; color: #000; }
+  main { padding: 0; }
+  #paper { max-width: none; padding: 0; }
+  #resume { max-width: none; margin: 0; padding: 0; border: 0; font-size: 10.5pt; line-height: 1.4; }
+  #resume, #resume * { color: #000; }
+  #resume a { text-decoration: none; }
+  #resume h3 { border-bottom: 1px solid #000; }
+}
