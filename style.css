@@ -1,13 +1,14 @@
 /* Colours, fonts and the spacing scale used everywhere */
 :root {
-  --bg: #FAF8F3;
+  --bg: #FCEEEE;
   --white: #FFFFFF;
-  --text: #1F1F1F;
-  --text-2: #4A4A4A;
-  --line: #D9D5CB;
-  --accent: #1F5C45;
-  --font-head: "DM Serif Display", Georgia, serif;
-  --font-body: "Inter", system-ui, Arial, sans-serif;
+  --text: #2B2326;
+  --text-2: #5A4B50;
+  --line: #EBD3D3;
+  --accent: #4A6B55;
+  --accent-dark: #34503F;
+  --font-head: "Fraunces", Georgia, serif;
+  --font-body: "Nunito Sans", system-ui, Arial, sans-serif;
   --s1: 8px;
   --s2: 16px;
   --s3: 24px;
@@ -26,27 +27,27 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   font-size: 1.0625rem;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 h1, h2, h3, h4 {
   margin: 0;
   font-family: var(--font-head);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.2;
 }
 
-h1 { font-size: clamp(2.25rem, 7vw, 3.5rem); }
-h2 { margin-bottom: var(--s3); font-size: 2rem; }
-h3 { margin-bottom: var(--s1); font-size: 1.375rem; }
+h1 { font-size: clamp(2.5rem, 7vw, 3.75rem); }
+h2 { margin-bottom: var(--s3); font-size: 2.125rem; }
+h3 { margin-bottom: var(--s1); font-size: 1.3125rem; }
 
 p { margin: 0; max-width: 68ch; }
 
 a { color: var(--accent); }
-a:hover { color: var(--text); }
+a:hover { color: var(--accent-dark); }
 a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
-/* Navigation bar, built with flexbox */
+/* Navigation bar, built with flexbox, with rounded link shapes */
 .nav-bar {
   position: sticky;
   top: 0;
@@ -62,7 +63,7 @@ a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
   justify-content: space-between;
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 var(--s3);
+  padding: var(--s1) var(--s3);
 }
 
 .nav-brand {
@@ -71,6 +72,7 @@ a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
   min-height: 44px;
   font-family: var(--font-head);
   font-size: 1.25rem;
+  font-weight: 600;
   color: var(--text);
   text-decoration: none;
 }
@@ -78,6 +80,7 @@ a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .nav-list {
   display: flex;
   flex-wrap: wrap;
+  gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -88,12 +91,13 @@ a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
   align-items: center;
   min-height: 44px;
   padding: 0 var(--s2);
+  border-radius: 999px;
   color: var(--text);
   text-decoration: none;
 }
 
-.nav-brand:hover,
-.nav-link:hover { color: var(--accent); text-decoration: underline; }
+.nav-brand:hover { color: var(--accent); }
+.nav-link:hover { background: var(--white); color: var(--accent-dark); }
 
 /* Page sections: one centred column with big gaps between sections */
 main { padding-bottom: var(--s5); }
@@ -104,11 +108,24 @@ main > section {
   padding: var(--s5) var(--s3) 0;
 }
 
-/* Hero: name, one sentence and the main buttons */
+/* About section: two short paragraphs, then language and interest cards */
+#about p + p { margin-top: var(--s2); }
+#about .cards { margin-top: var(--s4); }
+
+/* Hero: one big rounded white panel with name, sentence and buttons */
+#hero { padding-top: var(--s4); }
+
+.hero-panel {
+  padding: var(--s5) var(--s4);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+}
+
 .hero-role { margin: var(--s1) 0 var(--s3); font-size: 1.375rem; color: var(--text-2); }
 .hero-text { margin-bottom: var(--s3); }
 
-/* Buttons: filled for the main action, outlined for the others */
+/* Buttons: filled sage for the main action, outlined for the others */
 .button-row { display: flex; flex-wrap: wrap; gap: var(--s1); }
 
 .button {
@@ -118,9 +135,9 @@ main > section {
   min-height: 44px;
   padding: 0 var(--s3);
   border: 2px solid var(--accent);
-  border-radius: 4px;
+  border-radius: 999px;
   background: transparent;
-  color: var(--accent);
+  color: var(--accent-dark);
   font-weight: 600;
   text-decoration: none;
   transition: background-color 0.15s, color 0.15s;
@@ -128,20 +145,23 @@ main > section {
 
 .button:hover { background: var(--accent); color: var(--white); }
 .button-primary { background: var(--accent); color: var(--white); }
-.button-primary:hover { background: var(--white); color: var(--accent); }
+.button-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: var(--white); }
 
-/* Cards: flat white boxes with a thin outline, laid out with grid */
+/* Cards: flat white cards in Pinterest-style columns of different heights */
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--s3);
+  columns: 260px;
+  column-gap: var(--s3);
 }
 
 .card {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 var(--s3);
   padding: var(--s3);
   background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 20px;
+  break-inside: avoid;
 }
 
 .card p + p { margin-top: var(--s1); }
@@ -158,11 +178,12 @@ main > section {
   padding: var(--s4);
   background: var(--white);
   border: 1px solid var(--line);
+  border-radius: 8px;
   font-size: 0.9375rem;
   line-height: 1.5;
 }
 
-.resume-name { font-family: var(--font-head); font-size: 1.875rem; line-height: 1.2; }
+.resume-name { font-family: var(--font-head); font-size: 1.875rem; font-weight: 600; line-height: 1.2; }
 .resume-contact { margin-top: var(--s1); margin-bottom: var(--s2); }
 
 #resume h3 {
@@ -180,10 +201,12 @@ main > section {
 @media (max-width: 699px) {
   html { scroll-padding-top: 0; }
   .nav-bar { position: static; }
-  .nav { padding: 0 var(--s2); }
+  .nav { padding: var(--s1) var(--s2); }
   main > section { padding: var(--s4) var(--s2) 0; }
+  #hero { padding-top: var(--s3); }
+  .hero-panel { padding: var(--s4) var(--s3); border-radius: 20px; }
   h2 { font-size: 1.75rem; }
-  .cards { grid-template-columns: 1fr; }
+  .cards { columns: 1; }
   .button-row .button,
   #paper .button { width: 100%; }
   #resume { padding: var(--s3) var(--s2); }
@@ -198,7 +221,7 @@ main > section {
 @page { size: A4; margin: 15mm; }
 
 @media print {
-  .nav-bar, #hero, #experience, #analysis, #education, #contact,
+  .nav-bar, #hero, #about, #experience, #analysis, #education, #contact,
   #paper > h2, #paper > p { display: none; }
   body { background: #fff; color: #000; }
   main { padding: 0; }
